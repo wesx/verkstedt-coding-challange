@@ -48,10 +48,12 @@
          project: "{{ gcp_project }}"
          auth_kind: "{{ gcp_cred_kind }}"
          service_account_file: "{{ gcp_cred_file }}"
+         tags:
+           items:
+             - "http-server" # instructs the firewall to pass http traffic
          scopes:
            - https://www.googleapis.com/auth/compute
      register: instance
 
    - name: Wait for SSH to come up
      wait_for: host={{ address.address }} port=22 delay=10 timeout=60
-
