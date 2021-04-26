@@ -1,7 +1,3 @@
-- name: show address
-  debug:
-    msg: "{{ ansible_host }}"
-
 - name: build local docker image
   delegate_to: localhost
   become: false
@@ -36,10 +32,15 @@
 
 - name: start landing page container
   community.docker.docker_container:
+    container_default_behavior: no_defaults
     detach: true
     image: landingpage
     name: landingpage
     published_ports:
       - '80:80'
     restart_policy: always
+
+- name: deployment is reachable under
+  debug:
+    msg: "{{ ansible_host }}"
 

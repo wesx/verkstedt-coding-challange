@@ -25,6 +25,8 @@
          state: present
      register: address
 
+     # Make furture ssh connections use the external ip address
+     # a more sophisticated setup could use an bastion host instead
    - name: Determine remote address
      set_fact:
        ansible_host: "{{ address.address }}"
