@@ -1,0 +1,9 @@
+users:
+  - name: florian
+    groups:
+      - google-sudoers
+    ssh_keys: "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFyk9YVJOMIBlIOsSHU/ICPBikTVoJmuxECUpQCy2tUfn81IGqvuF1DjaF6zxGBezC+MaDXrwKQ/mCzr2+P7PMg= florian@work"
+  - name: some-other-user
+    groups:
+      - google-sudoers
+    ssh_keys: ""

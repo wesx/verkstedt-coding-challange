@@ -11,6 +11,12 @@
   roles:
     - google_setup
 
+- name: setup system information
+  hosts: all
+  become: True
+  roles:
+    - system
+
 - name: Manage web instances
   hosts: web
   become: True
