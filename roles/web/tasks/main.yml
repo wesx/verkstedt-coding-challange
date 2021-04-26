@@ -40,6 +40,19 @@
       - '80:80'
     restart_policy: always
 
+- name: test if the website is reachable
+  delegate_to: localhost
+  become: false
+  ansible.builtin.uri:
+    url: "http://{{ ansible_host }}/"
+    return_content: true
+  register: webpage
+
+- name: fail test if the website does not return the correct conntent
+  fail:
+    msg: 'webservice is not happy'
+  when: "'Lorem ipsum dolor sit amet' not in webpage.content"
+
 - name: deployment is reachable under
   debug:
     msg: "{{ ansible_host }}"
