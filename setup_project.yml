@@ -11,8 +11,8 @@
   roles:
     - google_setup
 
-      #- name: Manage web instances
-      #  hosts: web
-      #  become: True
-      #  roles:
-      #    - web
+- name: Manage web instances
+  hosts: web
+  become: True
+  roles:
+    - web

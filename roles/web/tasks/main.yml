@@ -1,0 +1,45 @@
+- name: show address
+  debug:
+    msg: "{{ ansible_host }}"
+
+- name: build local docker image
+  delegate_to: localhost
+  become: false
+  command:
+    cmd: docker build -t landingpage:latest .
+
+- name: export local docker image
+  delegate_to: localhost
+  become: false
+  command:
+    cmd: docker save landingpage -o landingpage.image
+
+- name: copy docker image to remote host
+  copy:
+    src: landingpage.image
+    dest: landingpage.image
+
+- name: update installed packages
+  apt:
+    upgrade: 'True'
+    update_cache: 'True'
+
+- name: ensure docker is installed
+  apt:
+    name:
+      - docker.io
+      - python3-docker
+
+- name: import landingpage image to docker
+  command:
+    cmd: docker load -i landingpage.image
+
+- name: start landing page container
+  community.docker.docker_container:
+    detach: true
+    image: landingpage
+    name: landingpage
+    published_ports:
+      - '80:80'
+    restart_policy: always
+
