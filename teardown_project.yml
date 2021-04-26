@@ -1,0 +1,12 @@
+- name: Create an instance
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+      gcp_project: starry-core-311909
+      gcp_cred_kind: serviceaccount
+      gcp_cred_file: /home/florian/git/verkstedt-coding-challange/service_account_credentials.json
+      zone: "europe-north1-a"
+      region: "europe-north1"
+  roles:
+    - google_teardown
