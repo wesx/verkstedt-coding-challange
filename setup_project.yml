@@ -1,5 +1,6 @@
 - name: Create an instance
-  hosts: localhost
+  hosts: all
+  connection: local
   gather_facts: no
   vars:
       gcp_project: starry-core-311909
