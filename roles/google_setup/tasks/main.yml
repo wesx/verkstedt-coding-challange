@@ -24,6 +24,11 @@
            - https://www.googleapis.com/auth/compute
          state: present
      register: address
+
+   - name: Determine remote address
+     set_fact:
+       ansible_host: "{{ address.address }}"
+
    - name: create a instance
      gcp_compute_instance:
          state: present
